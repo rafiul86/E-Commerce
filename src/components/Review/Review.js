@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import fakeData from '../../fakeData';
-import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
 import ReviewItems from '../ReviewItems/ReviewItems';
 
 const Review = () => {
      const [cart,setCart]  = useState([]);
+     const handlePlaceOrder = () => {
+        setCart([]);
+        processOrder()
+    }
      const removeItem = (productKey) => {
          const newCart = cart.filter(pd => pd.key !== productKey )
          setCart(newCart);
@@ -20,9 +24,8 @@ const Review = () => {
                     return product
                 })
             setCart(cartProducts)
-
-
-        },[])
+        },[]);
+        
     return (
         <div className ="shop-container">
             <div className ="product-container">
@@ -33,7 +36,9 @@ const Review = () => {
             }
             </div>
             <div className = "cart-container">
-                <Cart cart = {cart}></Cart>
+                <Cart cart = {cart}>
+                    <button onClick={handlePlaceOrder} className = "review-button">Place Order</button>
+                    </Cart>
             </div>
         </div>
     );

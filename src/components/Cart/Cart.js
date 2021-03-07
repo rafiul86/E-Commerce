@@ -6,7 +6,6 @@ import { faTags,faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 const Cart = (props) => {
     const cart = props.cart ;
     const totalPrice = cart.reduce((total , pd)=> total + pd.price * pd.quantity,0);
-    debugger ;
     const tax =Number((totalPrice/10).toFixed(2));
     let shippingCost ;
     if(totalPrice > 235){
@@ -26,7 +25,10 @@ const Cart = (props) => {
             <h4>Shipping Cost : {shippingCost}</h4>
             <h3>Tax + Vat % : {tax}</h3>
             <h2>Grand Total {((totalPrice + shippingCost + tax).toFixed(2))}</h2>
-            <button className = "review-button">Review Order</button>
+            <br/>
+            {
+                props.children
+            }
         </div>
     );
 };
