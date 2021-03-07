@@ -5,7 +5,8 @@ import { faTags,faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = (props) => {
     const cart = props.cart ;
-    const totalPrice = cart.reduce((total , pd)=> total + pd.price,0);
+    const totalPrice = cart.reduce((total , pd)=> total + pd.price * pd.quantity,0);
+    debugger ;
     const tax =Number((totalPrice/10).toFixed(2));
     let shippingCost ;
     if(totalPrice > 235){
